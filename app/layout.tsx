@@ -1,31 +1,30 @@
-import type { Metadata } from "next";
-import { Room } from "./Room";
 import { Work_Sans } from "next/font/google";
+
 import "./globals.css";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
-const workSans = Work_Sans({ 
-  subsets: ["latin"],
-  variable: '--font-work-sans',
-  weight: ['400', '600', '700']
- });
+import Room from "./Room";
 
-export const metadata: Metadata = {
-  title: "Bordeau",
-  description: "Lightweight Collabortion App",
+export const metadata = {
+  title: "Boardeau",
+  description:
+    "Lightweight realtime collaboration platform",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body className={`${workSans.className} bg-primary-grey-200`}>
-        <Room>
-        {children}
-        </Room>
-</body>
-    </html>
-  );
-}
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  variable: "--font-work-sans",
+  weight: ["400", "600", "700"],
+});
+
+const RootLayout = ({ children }: { children: React.ReactNode }) => (
+  <html lang='en'>
+    <body className={`${workSans.className} bg-primary-grey-200`}>
+      <Room>
+        <TooltipProvider>{children}</TooltipProvider>
+      </Room>
+    </body>
+  </html>
+);
+
+export default RootLayout;
